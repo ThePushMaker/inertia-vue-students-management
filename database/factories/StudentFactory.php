@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Classes;
+use App\Models\Section;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +19,10 @@ class StudentFactory extends Factory
     public function definition(): array
     {
         return [
+            'name' => $this->faker->name,
+            'email' => $this->faker->unique()->safeEmail,
+            // 'class_id' => Classes::factory(),
+            // 'section_id' => Section::factory(),
         ];
     }
 }

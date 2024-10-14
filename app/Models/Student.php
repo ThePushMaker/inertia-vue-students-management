@@ -15,4 +15,15 @@ class Student extends Model
         'class_id',
         'section_id',
     ];
+    
+    public function class_id()
+    {
+        // we define manually the foreign key otherwise it will be classes_id, and it doesn't exist in the database
+        return $this->belongsTo(Classes::class, 'class_id');
+    }
+    
+    public function section_id()
+    {
+        return $this->belongsTo(Section::class);
+    }
 }

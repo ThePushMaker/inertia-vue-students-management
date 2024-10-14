@@ -13,4 +13,15 @@ class Section extends Model
         'name',
         'class_id',
     ];
+    
+    protected function students()
+    {
+        return $this->hasMany(Student::class);
+    } 
+    
+    protected function sections()
+    {
+        //we define manually the foreign key otherwise it will be classes_id, and it doesn't exist in the database
+        return $this->belongsTo(Section::class, 'class_id'); 
+    }
 }
