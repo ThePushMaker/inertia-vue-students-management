@@ -15,6 +15,7 @@ class Classes extends Model
     
     public function sections()
     {
-        return $this->hasMany(Section::class);
+        // we define manually the foreign key otherwise it will be classes_id, and it doesn't exist in the database. This error occurs in the seeder
+        return $this->hasMany(Section::class, 'class_id');
     }
 }
