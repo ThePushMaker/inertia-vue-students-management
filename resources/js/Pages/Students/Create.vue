@@ -1,6 +1,13 @@
 <script setup>
 	import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 	import { Head } from '@inertiajs/vue3';
+  
+  defineProps({
+    classes: {
+      type: Object,
+      required: true,
+    },
+  });
 </script>
 
 <template>
@@ -50,8 +57,12 @@
                     <label for="class_id" class="block text-sm font-medium text-gray-700">Class</label>
                     <select id="class_id"
                       class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                      <option value="">
-                        Select a Class
+                      <option
+                        v-for="item in classes.data"
+                        :key="item.id"
+                        value="item.id"
+                      >
+                        {{ item.name }}
                       </option>
                       <option value="1">Class 1</option>
                     </select>
