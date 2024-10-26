@@ -1,6 +1,7 @@
 <script setup>
 	import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-	import { Head } from '@inertiajs/vue3';
+	import { Head, useForm } from '@inertiajs/vue3';
+  import { watch } from 'vue';
   
   defineProps({
     classes: {
@@ -8,6 +9,18 @@
       required: true,
     },
   });
+  
+  const form = useForm({
+    name: "",
+    email: "",
+    class_id: "",
+    section_id: "",
+  });
+  
+  watch(() => form.class_id, (newValue) => {
+    console.log(newValue);
+  });
+  
 </script>
 
 <template>
@@ -40,7 +53,10 @@
                 <div class="grid grid-cols-6 gap-6">
                   <div class="col-span-6 sm:col-span-3">
                     <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                    <input type="text" id="name"
+                    <input
+                      v-model="form.name" 
+                      type="text" 
+                      id="name"
                       class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error text-red-900 focus:ring-red-500 focus:border-red-500 border-red-300 @enderror" />
                     <p class="text-red-500">
                       This field is required
@@ -49,18 +65,24 @@
 
                   <div class="col-span-6 sm:col-span-3">
                     <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-                    <input type="email" id="email" autocomplete="email"
+                    <input 
+                      v-model="form.email" 
+                      type="email" 
+                      id="email"
+                      autocomplete="email"
                       class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
                     <label for="class_id" class="block text-sm font-medium text-gray-700">Class</label>
-                    <select id="class_id"
+                    <select 
+                      v-model="form.class_id"
+                      id="class_id"
                       class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                       <option
                         v-for="item in classes.data"
                         :key="item.id"
-                        value="item.id"
+                        :value="item.id"
                       >
                         {{ item.name }}
                       </option>
@@ -70,7 +92,9 @@
 
                   <div class="col-span-6 sm:col-span-3">
                     <label for="section_id" class="block text-sm font-medium text-gray-700">Section</label>
-                    <select id="section_id"
+                    <select 
+                      v-model="form.section_id"
+                      id="section_id"
                       class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                       <option value="">
                         Select a Section
