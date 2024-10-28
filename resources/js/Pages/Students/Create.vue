@@ -18,8 +18,13 @@
   });
   
   watch(() => form.class_id, (newValue) => {
-    console.log(newValue);
+    getSections(newValue);
+    
   });
+  
+  const getSections (classId) => {
+    
+  }
   
 </script>
 

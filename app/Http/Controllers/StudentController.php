@@ -17,6 +17,7 @@ class StudentController extends Controller
         return inertia('Students/Index', compact('students'));
     }
     
+
     public function create()
     {
         $classes = ClassesResource::collection(Classes::all());
