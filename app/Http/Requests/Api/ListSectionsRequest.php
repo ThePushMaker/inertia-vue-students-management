@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -11,7 +11,7 @@ class ListSectionsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,7 @@ class ListSectionsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'class_id' => ['required', 'exists:classes,id'],
         ];
     }
 }

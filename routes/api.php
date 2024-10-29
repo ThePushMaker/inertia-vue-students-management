@@ -8,4 +8,4 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('sections', SectionController::class)->name('sections.index');
+Route::get('sections', SectionController::class);
