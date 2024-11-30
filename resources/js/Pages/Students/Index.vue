@@ -1,7 +1,8 @@
 <script setup>
   import MagnifyingGlass from '@/Components/Icons/MagnifyingGlass.vue';
+  import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
   import Pagination from '@/Components/Pagination.vue';
-  import { usePage, Link } from '@inertiajs/vue3';
+  import { Link, Head } from '@inertiajs/vue3';
   
   defineProps({
       students: {
@@ -15,6 +16,17 @@
 </script>
 
 <template>
+    <Head title="Students List" />
+
+    <AuthenticatedLayout>
+        <template #header>
+            <h2
+                class="text-xl font-semibold leading-tight text-gray-800"
+            >
+                Students List
+            </h2>
+        </template>
+
   <div class="bg-gray-100 py-10">
     <div class="mx-auto max-w-7xl">
         <div class="px-4 sm:px-6 lg:px-8">
@@ -173,4 +185,5 @@
         </div>
     </div>
   </div>
+    </AuthenticatedLayout>
 </template>
