@@ -1,5 +1,6 @@
 <script setup>
-	import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+	import InputError from '@/Components/InputError.vue';
+  import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 	import { Head, useForm } from '@inertiajs/vue3';
   import { watch, ref } from 'vue';
   
@@ -67,10 +68,13 @@
                       v-model="form.name" 
                       type="text" 
                       id="name"
-                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error text-red-900 focus:ring-red-500 focus:border-red-500 border-red-300 @enderror" />
-                    <p class="text-red-500">
-                      This field is required
-                    </p>
+                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                      :class="{'text-red-900 focus:ring-red-500 focus:border-red-500 border-red-300' : form.errors.name,}"
+                    />
+                    <InputError
+                      :message="form.errors.name"
+                      class="mt-2"
+                    />
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
@@ -80,7 +84,14 @@
                       type="email" 
                       id="email"
                       autocomplete="email"
-                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                      :class="{'text-red-900 focus:ring-red-500 focus:border-red-500 border-red-300' : form.errors.email,}"
+                    />
+                  
+                    <InputError
+                      :message="form.errors.email"
+                      class="mt-2"
+                    />
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
@@ -88,7 +99,10 @@
                     <select 
                       v-model="form.class_id"
                       id="class_id"
-                      class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                      class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      :class="{'text-red-900 focus:ring-red-500 focus:border-red-500 border-red-300' : form.errors.class_id,}"
+                    >
+                      
                       <option
                         v-for="item in classes.data"
                         :key="item.id"
@@ -98,6 +112,10 @@
                       </option>
                       <option value="1">Class 1</option>
                     </select>
+                    <InputError
+                      :message="form.errors.class_id"
+                      class="mt-2"
+                    />
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
@@ -105,7 +123,9 @@
                     <select 
                       v-model="form.section_id"
                       id="section_id"
-                      class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                      class="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      :class="{'text-red-900 focus:ring-red-500 focus:border-red-500 border-red-300' : form.errors.section_id,}"
+                    >
                       <option value="">
                         Select a Section
                       </option>
@@ -117,6 +137,10 @@
                         {{ section.name }}
                       </option>
                     </select>
+                    <InputError
+                      :message="form.errors.section_id"
+                      class="mt-2"
+                    />
                   </div>
                 </div>
               </div>
