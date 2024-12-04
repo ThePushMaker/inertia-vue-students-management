@@ -12,11 +12,28 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $students = StudentResource::collection(Student::paginate(10));
+        $studentsQuery = Student::query();
         
-        return inertia('Students/Index', compact('students'));
+        $this->applySearch($studentsQuery, $request->search);
+        
+        // $students = StudentResource::collection(Student::paginate(10));
+        $students = StudentResource::collection($studentsQuery->paginate(10));
+        
+        return inertia('Students/Index', [
+            'students' => $students,
+            'search' => $request->search ?? '',
+        ]);
+    }
+    
+    protected function applySearch($query, $search)
+    {
+        // 'when' means that if $search is present we will execute the closure i.e. the $query->where
+        return $query->when($search, function ($query, $search){
+            $query->where('name', 'like', '%'.$search.'%')
+            ->orWhere('email', 'like', '%'.$search.'%');
+        });
     }
     
 
