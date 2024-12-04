@@ -36,9 +36,12 @@ class StudentController extends Controller
     
     public function edit(Student $student)
     {
-        $classes = ClassesResource::collection(Classes:all());
+        $classes = ClassesResource::collection(Classes::all());
         
-        return inertia('Students/Edit', compact('classes'));
+        return inertia('Students/Edit', [
+            'classes' => $classes,
+            'student' => StudentResource::make($student)
+        ]);
     }
     
     public function update(UpdateStudentRequest $request, Student $student)

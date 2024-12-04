@@ -24,7 +24,7 @@ class UpdateStudentRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'. Student::class . ',' . $this->student->id],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'. Student::class . ',email,' . $this->student->id],
             'class_id' => ['required', 'exists:classes,id'],
             'section_id' => ['required', 'exists:sections,id'],
         ];
