@@ -2,7 +2,7 @@
   import MagnifyingGlass from '@/Components/Icons/MagnifyingGlass.vue';
   import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
   import Pagination from '@/Components/Pagination.vue';
-  import { Link, Head } from '@inertiajs/vue3';
+  import { Link, Head, useForm } from '@inertiajs/vue3';
   
   defineProps({
       students: {
@@ -11,7 +11,14 @@
       },
   });
   
-//   console.log(usePage().props.students);
+//   useForm helper without any data, just an empty object
+  const deleteForm = useForm({});
+  
+  const deleteStudent = (studentId) => {
+      if(confirm('Are you sure you want to delete this student?')) {
+        deleteForm.delete(route('students.destroy', studentId));
+      }
+  }
   
 </script>
 
@@ -169,6 +176,7 @@
                                                 Edit
                                             </Link>
                                             <button
+                                                @click="deleteStudent(student.id)"
                                                 class="ml-2 text-indigo-600 hover:text-indigo-900"
                                             >
                                                 Delete
