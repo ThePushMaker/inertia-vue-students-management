@@ -44,6 +44,15 @@
       
   });
   
+  watch(
+      () => search.value,
+        updatedValue => {
+            if(updatedValue){
+                pageNumber.value = 1;
+            }
+        }
+    );
+  
 //   useForm helper without any data, just an empty object
   const deleteForm = useForm({});
   
