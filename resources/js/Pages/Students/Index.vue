@@ -27,6 +27,12 @@
       return url;
   });
   
+  const updatedPageNumber = link => {
+    //   console.log(link.url);
+      
+      pageNumber.value = link.url.split("=")[1];
+  }
+  
   watch(() => studentsUrl.value,
         (updatedStudentsUrl) => {
     //   console.log(updatedStudentsUrl);
@@ -214,7 +220,10 @@
                                 </tbody>
                             </table>
                         </div>
-                        <Pagination :data="students" />
+                        <Pagination 
+                            :data="students" 
+                            :updatedPageNumber="updatedPageNumber"
+                        />
                     </div>
                 </div>
             </div>

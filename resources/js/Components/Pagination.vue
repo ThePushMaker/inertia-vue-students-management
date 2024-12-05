@@ -6,6 +6,10 @@
       type: Object,
       required: true,
     },
+    updatedPageNumber: {
+      type: Function,
+      required: true,
+    },
   });
   
   // old way to redirect to other page
@@ -18,17 +22,17 @@
   // };
   
   // this way to redirect to other page is better, because it will get only the page number in the url
-  const updatePageNumber = (link) => {
+  // const updatePageNumber = (link) => {
 
-    const url = new URL(link.url);
-    const params =  url.searchParams;
+  //   const url = new URL(link.url);
+  //   const params =  url.searchParams;
 
-    url.searchParams.set('page', params.get('page'));
+  //   url.searchParams.set('page', params.get('page'));
 
-    router.visit(url.href,  {
-          preserveScroll: true,
-    });
-  }
+  //   router.visit(url.href,  {
+  //         preserveScroll: true,
+  //   });
+  // }
   
 </script>
 
@@ -72,7 +76,7 @@
                             aria-label="Pagination"
                         >
                             <button
-                                @click.prevent="updatePageNumber(link)"
+                                @click.prevent="updatedPageNumber(link)"
                                 v-for="(link, index) in data.meta.links"
                                 :key="index"
                                 :disabled="link.acive || !link.url"
